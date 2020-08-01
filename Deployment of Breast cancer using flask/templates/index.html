@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;background-color: aqua;}
+* {box-sizing: border-box;}
+
+/* Full-width input fields */
+input[type=text]{
+  width: 50%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  
+  border: none;
+  background: #bc9cbd;
+  font-size: larger;
+}
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus, input[type=password]:focus {
+  background-color: rgb(221, 221, 221);
+  outline: none;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: rgb(76, 32, 197);
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.9;
+  margin-top: auto;
+  
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+ 
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #da0f2a;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+  text-align: center;
+  
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 100px) {
+.signupbtn {
+     width: 50%;
+  }
+}
+</style>
+<body>
+
+<h1 style="text-align: center;color: #f44336;">PREDICTING THE BREAST CANCER </h1>
+<center>
+<button onclick="document.getElementById('id01').style.display='block'" style="width: 400px;height: 100px;font-size: larger;"><b>Predict Now</b></button>
+</center>
+<center><h1>{{prediction_text}}</h1></center>
+
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <form class="modal-content" action="{{url_for('predict')}}" method="POST">
+    <div class="container">
+      <h1 style="text-align: center;color: rgb(24, 202, 33);">Breast Cancer Detections</h1>
+      
+      <center>
+      <input type="text" placeholder="mean radius" name="mean radius" required>
+      <input type="text" placeholder="mean texture" name="mean texture" required>
+      <input type="text" placeholder="mean perimeter" name="mean perimeter" required>
+      <input type="text" placeholder="mean area" name="mean area" required>
+      <input type="text" placeholder="mean smoothness" name="mean smoothness" required>
+      <input type="text" placeholder="mean compactness" name="mean compactness" required>
+      <input type="text" placeholder="mean concavity" name="mean concavity" required>
+      <input type="text" placeholder="mean concave points" name="mean concave points" required>
+      <input type="text" placeholder="mean symmetry" name="mean symmetry" required>
+      <input type="text" placeholder="mean fractal dimension" name="mean fractal dimension" required>
+
+
+
+      <input type="text" placeholder="radius error" name="radius error" required>
+      <input type="text" placeholder="texture error" name="texture error" required>
+      <input type="text" placeholder="perimeter error" name="perimeter error" required>
+      <input type="text" placeholder="area error" name="area error" required>
+      <input type="text" placeholder="smoothness error" name="smoothness error" required>
+      <input type="text" placeholder="compactness error" name="compactness error" required>
+      <input type="text" placeholder="concavity error" name="concavity error" required>
+      <input type="text" placeholder="concave points error " name="concave points error" required>
+      <input type="text" placeholder="symmetry error" name="symmetry error" required>
+      <input type="text" placeholder="fractal dimension error" name="fractal dimension error" required>
+      <input type="text" placeholder="worst radius" name="worst radius" required>
+      <input type="text" placeholder="worst texture" name="worst texture" required>
+      <input type="text" placeholder="worst perimeter" name="worst perimeter" required>
+      <input type="text" placeholder="worst area" name="worst area " required>
+      <input type="text" placeholder="worst smoothness" name="worst smoothness" required>
+      <input type="text" placeholder="worst compactness" name="worst compactness" required>
+      <input type="text" placeholder="worst concavity" name="worst concavity" required>
+      <input type="text" placeholder="worst concave points" name="worst concave points" required>
+      <input type="text" placeholder="worst symmetry" name="worst symmetry" required>
+      <input type="text" placeholder="worst fractal dimension" name="worst fractal dimension" required>
+      
+     </center>
+     <center>
+      <div class="clearfix">
+        
+        <button type="submit" style="font-size: larger;"><b>submit</b></button>
+      </div>
+    </center>
+    
+    </div>
+
+  </form>
+</div>
+
+<script>
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+</script>
+
+</body>
+</html>
